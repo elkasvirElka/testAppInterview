@@ -1,8 +1,8 @@
 package com.example.testappua.di.module
 
+import com.example.testappua.BuildConfig
 import com.example.testappua.framework.network.OkHttpProvider
 import com.example.testappua.framework.network.RxNewsClient
-import com.example.testappua.framework.network.source.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

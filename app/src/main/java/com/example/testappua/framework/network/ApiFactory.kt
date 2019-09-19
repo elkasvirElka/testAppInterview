@@ -1,6 +1,6 @@
 package com.example.testappua.framework.network
 
-import com.example.testappua.framework.network.source.BuildConfig
+import com.example.testappua.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

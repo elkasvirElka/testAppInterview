@@ -1,4 +1,4 @@
-package com.example.testappua
+package com.example.testappua.ui.fragment.webView
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import androidx.fragment.app.Fragment
+import com.example.testappua.R
 
 class FragmentWebView : Fragment(){
 

@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testappua.FragmentWebView
+import com.example.testappua.ui.fragment.webView.FragmentWebView
 import com.example.testappua.MyApplication
 import com.example.testappua.R
 import com.example.testappua.data.models.ArticleModel

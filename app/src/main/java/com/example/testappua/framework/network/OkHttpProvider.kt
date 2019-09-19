@@ -1,6 +1,6 @@
 package com.example.testappua.framework.network
 
-import com.example.testappua.framework.network.source.BuildConfig
+import com.example.testappua.BuildConfig
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

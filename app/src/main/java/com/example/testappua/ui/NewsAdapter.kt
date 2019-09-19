@@ -14,16 +14,16 @@ class NewsAdapter :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     private var mDialogs = ArrayList<ArticleModel>()
-    private lateinit var listener: OnClickAdapterListener
+    private var listener: OnClickAdapterListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_news,
-                parent,
-                false
-            ), listener
-        )
+
+       val view =  LayoutInflater.from(parent.context).inflate(
+           R.layout.item_news,
+           parent,
+           false
+       )
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -33,7 +33,7 @@ class NewsAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var data = mDialogs[position]
         holder.bind(data)
-        //holder.itemView.setOnClickListener { data }
+        holder.itemView.setOnClickListener { listener?.onClickItemNews(data) }
     }
 
     fun addList(list: List<ArticleModel>) {
@@ -56,14 +56,16 @@ class NewsAdapter :
         notifyDataSetChanged()
     }
 
+    interface OnClickAdapterListener {
+        fun onClickItemNews(data: ArticleModel)
+    }
+
     inner class ViewHolder(
-        itemView: View,
-        private val listener: OnClickAdapterListener
-    ) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val picture: ImageView = itemView.findViewById(R.id.picture)
         private val title: TextView = itemView.findViewById(R.id.title)
-        private val content: TextView = itemView.findViewById(R.id.content)
+        val content: TextView = itemView.findViewById(R.id.content)
 
         fun bind(data: ArticleModel) {
 
@@ -72,16 +74,13 @@ class NewsAdapter :
             title.text = data.title
             content.text = (data.content ?: "")
 
-            itemView.setOnClickListener { data }
+           // itemView.setOnClickListener { data }
         }
 
-        override fun onClick(v: View?) {
+        /*override fun onClick(v: View?) {
             listener.onClickItemNews(getData(adapterPosition))
-        }
+        }*/
     }
 
-    interface OnClickAdapterListener {
-        fun onClickItemNews(data: ArticleModel)
-    }
 
 }
