@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestAppUA</string>
+    <string name="push_me">Push me</string>
+    <string name="fragment_a">Fragment A!</string>
+    <string name="activity_b">Activity B!</string>
+    <string name="mock_str">test</string>
+</resources>
