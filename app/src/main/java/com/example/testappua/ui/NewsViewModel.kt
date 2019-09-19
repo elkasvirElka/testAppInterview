@@ -1,7 +1,9 @@
 package com.example.testappua.ui
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.testappua.data.repository.NewsRepository
 import io.reactivex.Scheduler
@@ -11,6 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+
 class NewsViewModel @Inject constructor(private val repository: NewsRepository)
     : ViewModel(){
     private val compositeDisposable = CompositeDisposable()
@@ -19,12 +22,19 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository)
     val view : LiveData<NewsViewState>
         get() = _viewState
 
+
     fun action(action: NewsAction) {
         when (action) {
             is NewsAction.FetchNews -> getNews()
         }
     }
-    private fun getNews(){
+
+    override fun onCleared() {
+        compositeDisposable.clear()
+    }
+
+    @VisibleForTesting
+    fun getNews(){
         compositeDisposable.add(
             repository.getNews()
                 .subscribeOn(Schedulers.io())
