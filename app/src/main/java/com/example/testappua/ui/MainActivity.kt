@@ -43,17 +43,6 @@ class MainActivity : AppCompatActivity(), NewsAdapter.OnClickAdapterListener {
         })
     }
 
-    private fun addFragmentToActivity(
-        fragmentManager: androidx.fragment.app.FragmentManager,
-        fragment: androidx.fragment.app.Fragment, frameId: Int
-    ) {
-        val transaction = fragmentManager.beginTransaction()
-        transaction.add(frameId, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
-
-
     override fun onClickItemNews(data: ArticleModel) {
         addFragmentToActivity(supportFragmentManager, FragmentWebView.newInstance(data.url), R.id.main_container)
     }
@@ -64,6 +53,17 @@ class MainActivity : AppCompatActivity(), NewsAdapter.OnClickAdapterListener {
 
     fun hideProgressBar() {
         progressBar.visibility = View.GONE
+    }
+
+
+    private fun addFragmentToActivity(
+        fragmentManager: androidx.fragment.app.FragmentManager,
+        fragment: androidx.fragment.app.Fragment, frameId: Int
+    ) {
+        val transaction = fragmentManager.beginTransaction()
+        transaction.add(frameId, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun render(state: NewsViewState) {

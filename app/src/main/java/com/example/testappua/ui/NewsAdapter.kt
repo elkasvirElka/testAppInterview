@@ -13,55 +13,51 @@ import com.squareup.picasso.Picasso
 class NewsAdapter :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
-    private var mDialogs = ArrayList<ArticleModel>()
+    private var mNews = ArrayList<ArticleModel>()
     private var listener: OnClickAdapterListener? = null
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-       val view =  LayoutInflater.from(parent.context).inflate(
-           R.layout.item_news,
-           parent,
-           false
-       )
-        return ViewHolder(view)
-    }
-
-    override fun getItemCount(): Int {
-        return mDialogs.size
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var data = mDialogs[position]
-        holder.bind(data)
-        holder.itemView.setOnClickListener { listener?.onClickItemNews(data) }
-    }
-
-    fun addList(list: List<ArticleModel>) {
-        mDialogs.addAll(list)
-        notifyDataSetChanged()
-    }
- fun  setOnActionListener(listener: OnClickAdapterListener){
-     this.listener = listener
- }
-    fun setList(list: List<ArticleModel>) {
-        mDialogs.clear()
-        mDialogs.addAll(list)
-        notifyDataSetChanged()
-    }
-
-    fun getData(position: Int) = mDialogs[position]
-
-    fun clear() {
-        mDialogs.clear()
-        notifyDataSetChanged()
-    }
 
     interface OnClickAdapterListener {
         fun onClickItemNews(data: ArticleModel)
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_news,
+            parent,
+            false
+        )
+        return ViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return mNews.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var data = mNews[position]
+        holder.bind(data)
+        holder.itemView.setOnClickListener { listener?.onClickItemNews(data) }
+    }
+
+    fun addList(list: List<ArticleModel>) {
+        mNews.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun setOnActionListener(listener: OnClickAdapterListener) {
+        this.listener = listener
+    }
+
+    fun setList(list: List<ArticleModel>) {
+        mNews.clear()
+        mNews.addAll(list)
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(
-        itemView: View) : RecyclerView.ViewHolder(itemView) {
+        itemView: View
+    ) : RecyclerView.ViewHolder(itemView) {
 
         private val picture: ImageView = itemView.findViewById(R.id.picture)
         private val title: TextView = itemView.findViewById(R.id.title)
@@ -73,13 +69,7 @@ class NewsAdapter :
 
             title.text = data.title
             content.text = (data.content ?: "")
-
-           // itemView.setOnClickListener { data }
         }
-
-        /*override fun onClick(v: View?) {
-            listener.onClickItemNews(getData(adapterPosition))
-        }*/
     }
 
 
